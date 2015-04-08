@@ -571,6 +571,7 @@ class ExcelCompiler(object):
             e = shunting_yard(cell.formula or str(cell.value))
             ast,root = build_ast(e)
             code = root.emit(ast,context=Context(cell,self.excel))
+            # print code
         else:
             ast = None
             code = str('"' + cell.value + '"' if isinstance(cell.value,unicode) else cell.value)

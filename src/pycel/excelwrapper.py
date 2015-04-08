@@ -55,7 +55,7 @@ class ExcelComWrapper(object):
         return self.app.ActiveWorkbook.ActiveSheet
             
     def get_range(self, range):
-        #print '*',range
+        # print '*',range
         if range.find('!') > 0:
             sheet,range = range.split('!')
             return self.app.ActiveWorkbook.Worksheets(sheet).Range(range)

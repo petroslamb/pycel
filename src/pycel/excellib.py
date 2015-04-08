@@ -21,15 +21,21 @@ from pycel.excelutil import flatten
 FUNCTION_MAP = {
       "ln":"xlog",
       "min":"xmin",
-      "min":"xmin",
       "max":"xmax",
       "sum":"xsum",
-      "gammaln":"lgamma"
+      "gammaln":"lgamma",
+      "text":"xstr"
       }
 
 ######################################################################################
 # List of excel equivalent functions
 # TODO: needs unit testing
+
+def char(num):
+    return chr(num)
+
+def xstr(num, *unused_args):
+    return str(num)
 
 def value(text):
     # make the distinction for naca numbers

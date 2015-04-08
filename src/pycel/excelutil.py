@@ -81,15 +81,15 @@ class Cell(object):
             pass
                 
         # we assume a cell's location can never change
-        self.__sheet = str(sheet)
-        self.__formula = str(formula) if formula else None
+        self.__sheet = sheet.encode('utf-8') 
+        self.__formula = formula.encode('utf-8') if formula else None 
         
         self.__sheet = sh
         self.__col = c
         self.__row = int(r)
         self.__col_idx = col2num(c)
             
-        self.value = str(value) if isinstance(value,unicode) else value
+        self.value = value.encode('utf-8') if isinstance(value,unicode) else value
         self.python_expression = None
         self._compiled_expression = None
         
@@ -176,6 +176,10 @@ class Cell(object):
         r = excel.get_range(address)
         f = r.Formula if r.Formula.startswith('=') else None
         v = r.Value
+        if isinstance(v, float):
+            v = round(r.Value, 5)
+        if v == None:
+            v = 0
         
         sh,c,r = split_address(address)
         
@@ -432,3 +436,4 @@ def uniqueify(seq):
 
 if __name__ == '__main__':
     pass
+
